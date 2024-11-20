@@ -61,7 +61,7 @@ void integral(int func_num, double pr, double a, double b, bool check) {
 			if (i != 0)
 				sum_x_1 += array_y[i];
 
-			sum_x_2 += 6 * pow(array_x[i] + h / 2, 5);
+			sum_x_2 += func(func_num, array_x[i] + h / 2);
 		}
 
 		double J = (h / 6) * (array_y[0] + array_y[count_segments] + 2 * sum_x_1 + 4 * sum_x_2);
@@ -72,8 +72,8 @@ void integral(int func_num, double pr, double a, double b, bool check) {
 			K_d = (J_old - J_old_old) / (J - J_old);
 
 
-		
-		if (check) 
+
+		if (check)
 			d_pr = pr - J;
 
 
@@ -85,7 +85,7 @@ void integral(int func_num, double pr, double a, double b, bool check) {
 
 		double d_th = 0;
 
-		if (check) 
+		if (check)
 			for (int i = 0; i <= count_segments; i++)
 				if (deriv(func_num, array_x[i]) > d_th)
 					d_th = deriv(func_num, array_x[i]);
@@ -101,24 +101,24 @@ void integral(int func_num, double pr, double a, double b, bool check) {
 
 		cout << count_segments << "\r";
 
-		if (K_d != 0) 
+		if (K_d != 0)
 			cout << "\t" << K_d << "\r";
-		else 
+		else
 			cout << "\t" << "-\r";
 
-		if (check) 
+		if (check)
 			cout << "\t\t\t" << d_pr << "\r";
-		else 
+		else
 			cout << "\t\t\t" << "-\r";
 
-		if (K_Run != 0) 
+		if (K_Run != 0)
 			cout << "\t\t\t\t\t" << K_Run << "\r";
-		else 
+		else
 			cout << "\t\t\t\t\t" << "-\r";
 
-		if (check) 
+		if (check)
 			cout << "\t\t\t\t\t\t\t" << d_th << "\n";
-		else 
+		else
 			cout << "\t\t\t\t\t\t\t" << "-\n";
 
 
